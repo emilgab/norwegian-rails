@@ -1,3 +1,11 @@
 body {
-  
+
+}
+
+#toggle-icon {
+  border: None;
+}
+
+.navbar-toggler-icon {
+  width: 50px;
 }

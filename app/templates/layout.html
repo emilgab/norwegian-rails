@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Norwegian Rails</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
     <!--- bootstrap CSS, JavaScript, Popper.js and jQuery --->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -13,9 +12,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--- Favicon --->
     <link rel="shortcut icon" type="image/png" href="{{url_for('static',filename='img/favicon.png')}}"/>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
 
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbar" id="toggle-icon">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <span class="navbar-brand d-flex flex-fill"><a href="#home">Norwegian Rails</a></span>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav ml-auto">
+          {% for x,y in nav_items.items() %}
+          <li class="nav-item">
+            <a class="nav-link block" href="{{y['href']}}">{{x}}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </nav>
     {% block content %}
     {% endblock %}
   </body>
