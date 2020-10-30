@@ -1,11 +1,17 @@
 body {
+  background-image: url('../img/bg-element.png');
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-color: rgb(50,48,49);
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  min-width: 100vh;
+}
 
+body, p, h1, h2, h3, h4, h5 {
+  color: rgb(179,142,71);
 }
 
 #toggle-icon {
   border: None;
-}
-
-.navbar-toggler-icon {
-  height: 20px;
 }

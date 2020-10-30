@@ -1,0 +1,41 @@
+.toggle-icon {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.toggle-icon.rotating {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.navbar a:after, .navbar a:visited:after {
+  content: '';
+  height: 2.5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  background: rgb(179,142,71);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.navbar a, .navbar a:visited,
+.projects a, .projects a:visited,
+.nav-tabs a, .nav-tabs:visited {
+  text-decoration: none;
+  position: relative;
+}
+
+.navbar a:hover:after, .navbar a:visited:hover:after,
+.projects a:hover:after, .projects a:visited:hover:after,
+.nav-tabs a:hover:after, .nav-tabs a:visited:hover:after {
+  width: 100%;
+}
+
+.navbar a.block, .navbar a:visited.block {
+  display: block;
+  padding: 0.5em;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
