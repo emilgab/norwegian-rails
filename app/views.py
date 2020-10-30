@@ -4,8 +4,8 @@ from flask import Flask, render_template, Markup
 nav_items = {
     "HOME":"homepage",
     "BUY TICKET":"purchase",
-    "SHOW TICKETS":"show_tickets",
-    "YOUR PROFILE":"profile",
+    #"SHOW TICKETS":"show_tickets",
+    #"YOUR PROFILE":"profile",
     "ABOUT US":"about",
     "LOG IN":"login"
 }

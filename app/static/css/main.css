@@ -1,11 +1,10 @@
 body {
   background-image: url('../img/bg-element.png');
   background-repeat: repeat-x;
-  background-position: bottom;
+  background-position: center bottom;
   background-color: rgb(50,48,49);
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
-  min-width: 100vh;
 }
 
 body, p, h1, h2, h3, h4, h5 {
@@ -14,4 +13,26 @@ body, p, h1, h2, h3, h4, h5 {
 
 #toggle-icon {
   border: None;
+}
+
+.card {
+  background-color: rgb(83,71,49);
+}
+
+.card .btn {
+  background-color: rgba(83,71,49);
+  color: rgb(179,142,71);
+  border-color: rgb(179,142,71);
+}
+
+.btn:focus {
+  background-color: white;
+}
+
+.credit a {
+  color: white;
+}
+
+.credit a:hover {
+  color: grey;
 }

@@ -2,7 +2,24 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <h2>Homepage</h2>
+    <div class="col-12">
+      <h2>News</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card" style="">
+        <img class="card-img-top" src="{{url_for('static',filename='img/stories/train-station.png')}}">
+        <div class="card-body">
+          <h5 class="card-title">Information regarding travel and COVID-19</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-secondary">Go to story</a>
+        </div>
+        <div class="card-footer">
+          <span class="credit" style="font-size:12px;">Photo by <a href="https://unsplash.com/@charles_forerunner?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Charles Forerunner</a> on <a href="https://unsplash.com/s/photos/train?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
