@@ -1,5 +1,6 @@
 from app import app
 from flask import Flask, render_template, Markup
+from app.forms import Login
 
 nav_items = {
     "HOME":"homepage",
@@ -32,4 +33,6 @@ def about():
 
 @app.route('/login')
 def login():
-    return render_template("login.html", nav_items=nav_items)
+    # forms
+    form = Login()
+    return render_template("login.html", nav_items=nav_items, form=form)
