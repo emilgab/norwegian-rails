@@ -3,8 +3,44 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2>Purchase a ticket</h2>
+      <h2 class="mb-5">Purchase a ticket</h2>
     </div>
   </div>
+  <form class="" method="POST">
+    <div class="row mb-3">
+      <div class="col-6">
+        <div class="form-group">
+          {{form.hidden_tag()}}
+          {{form.start_station.label()}}
+          {{form.start_station(class="form-control custom-form")}}
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          {{form.end_station.label()}}
+          {{form.end_station(class="form-control custom-form")}}
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <div class="form-group">
+          {{form.travel_date.label()}}
+          {{form.travel_date(class="form-control custom-form")}}
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          {{form.number_of_passengers.label()}}
+          {{form.number_of_passengers(class="form-control custom-form", value="1")}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        {{form.submit(class="btn btn-secondary btn-block")}}
+      </div>
+    </div>
+  </form>
 </div>
 {% endblock %}

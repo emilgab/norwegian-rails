@@ -52,3 +52,8 @@ form .custom-form, form .custom-form:focus {
   color: #b38e47;
   background-color: rgba(255,255,255,0);
 }
+
+.custom-form::placeholder {
+  color: #b38e47;
+  opacity: 0.5;
+}

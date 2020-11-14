@@ -1,6 +1,6 @@
 from app import app
 from flask import Flask, render_template, Markup
-from app.forms import Login
+from app.forms import Login, PurchaseTicket
 
 nav_items = {
     "HOME":"homepage",
@@ -17,7 +17,8 @@ def homepage():
 
 @app.route('/purchase')
 def purchase():
-    return render_template("purchase_tickets.html", nav_items=nav_items)
+    form = PurchaseTicket()
+    return render_template("purchase_tickets.html", nav_items=nav_items, form=form)
 
 @app.route('/show_tickets')
 def show_tickets():
