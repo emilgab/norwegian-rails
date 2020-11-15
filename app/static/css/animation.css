@@ -4,8 +4,8 @@
 }
 
 .toggle-icon.rotating {
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .navbar a:after, .navbar a:visited:after {

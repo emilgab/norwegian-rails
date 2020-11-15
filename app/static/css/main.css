@@ -50,7 +50,8 @@ form .custom-form, form .custom-form:focus {
   border-radius: 0;
   border-bottom: solid 2px #b38e47;
   color: #b38e47;
-  background-color: rgba(255,255,255,0);
+  background-color: rgba(50,48,49,1);
+  -webkit-appearance:none;
 }
 
 .custom-form::placeholder {
