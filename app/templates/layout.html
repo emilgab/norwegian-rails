@@ -38,6 +38,11 @@
             <a class="nav-link block" style="color: rgb(179,142,71); font-family: 'Roboto', sans-serif;" href="{{url_for(y)}}">{{x}}</a>
           </li>
           {% endfor %}
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link block" style="color: rgb(179,142,71); font-family: 'Roboto', sans-serif;" href="{{url_for('logout')}}">LOG OUT</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </nav>

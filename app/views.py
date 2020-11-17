@@ -58,15 +58,15 @@ def login():
         form = Login()
         if form.validate_on_submit():
             try:
-                user.Users.query.filter_by(username=form.username.data).first()
+                user = Users.query.filter_by(username=form.username.data).first()
             except:
                 pass
             try:
-                if user.password == form.password.data and user is not None:
+                if user.password == form.password.data:
                     login_user(user)
                     next = request.args.get('next')
                     if next == None or not next[0] == '/':
-                        next = url_for('home')
+                        next = url_for('homepage')
                     return redirect(next)
             except:
                 pass
