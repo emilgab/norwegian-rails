@@ -26,45 +26,10 @@
     <div class="col-2">
     </div>
     <div class="col-8">
-      <hr>
+      <p>Not a user yet?</p>
+      <button class="btn btn-secondary btn-block" type="button" name="button" href="{{url_for('register')}}">Register</button>
     </div>
     <div class="col-2">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
-      <h2 class="mb-5">Register</h2>
-      <form class="" method="post">
-        <div class="row mb-3">
-          <div class="col-6">
-            {{register.hidden_tag()}}
-            {{register.username.label()}}
-            {{register.username(class="form-control custom-form")}}
-          </div>
-          <div class="col-6">
-            {{register.fullname.label()}}
-            {{register.fullname(class="form-control custom-form")}}
-          </div>
-        </div>
-        <div class="row mb-5">
-          <div class="col-6">
-            {{register.hidden_tag()}}
-            {{register.password.label()}}
-            {{register.password(class="form-control custom-form")}}
-          </div>
-          <div class="col-6">
-            {{register.repeat_password.label()}}
-            {{register.repeat_password(class="form-control custom-form")}}
-          </div>
-        </div>
-        <div class="row pb-5">
-          <div class="col-12">
-            {{register.submit(class="btn form-control")}}
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </div>

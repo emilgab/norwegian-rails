@@ -17,8 +17,8 @@ class Login(FlaskForm):
 class QuickRegister(FlaskForm):
     username = StringField(u"Username:",validators=[validators.DataRequired()])
     fullname = StringField(u"Full name:",validators=[validators.DataRequired()])
-    password = StringField(u"Password:",validators=[validators.DataRequired()])
-    repeat_password = StringField(u"Repeat password:",validators=[validators.DataRequired()])
+    password = PasswordField(u"Password:",validators=[validators.DataRequired()])
+    repeat_password = PasswordField(u"Repeat password:",validators=[validators.DataRequired()])
     submit = SubmitField("Register")
 
 class MultiCheckboxField(SelectMultipleField):

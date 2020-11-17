@@ -1,4 +1,4 @@
-from app import app
+from app import app, db
 from flask import Flask, render_template, session, redirect, url_for
 from app.models import Users, Ticket
 from app.forms import Login, PurchaseTicket, QuickRegister, EntryAuth
@@ -51,19 +51,18 @@ def about():
     else:
         return redirect(url_for('access_site'))
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
     if session.get('access_granted') == True:
         # forms
         form = Login()
-        register = QuickRegister()
         if form.validate_on_submit():
             try:
                 user.Users.query.filter_by(username=form.username.data).first()
             except:
                 pass
             try:
-                if user.password == form.password.data:
+                if user.password == form.password.data and user is not None:
                     login_user(user)
                     next = request.args.get('next')
                     if next == None or not next[0] == '/':
@@ -71,9 +70,24 @@ def login():
                     return redirect(next)
             except:
                 pass
-        return render_template("login.html", nav_items=nav_items, form=form, register=register)
+        return render_template("login.html", nav_items=nav_items, form=form)
     else:
         return redirect(url_for('access_site'))
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+    form = QuickRegister()
+    if session.get('access_granted') == True:
+        if form.validate_on_submit():
+            username = form.username.data
+            fullname = form.fullname.data
+            if form.password.data == form.repeat_password.data:
+                password = form.password.data
+                new_user = Users(username=username, password=password, fullname=fullname)
+                db.session.add(new_user)
+                db.session.commit()
+            return redirect(url_for('homepage'))
+        return render_template('register.html',nav_items=nav_items, form=form)
 
 @app.route('/logout')
 @login_required
