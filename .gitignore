@@ -132,3 +132,7 @@ dmypy.json
 
 # MAC related files
 .DS_Store
+
+# SQLITE db
+migrations/
+data.sqlite
