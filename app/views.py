@@ -1,5 +1,5 @@
 from app import app, db
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, request
 from app.models import Users, Ticket
 from app.forms import Login, PurchaseTicket, QuickRegister, EntryAuth
 from flask_login import login_user, login_required, logout_user
