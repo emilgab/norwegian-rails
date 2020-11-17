@@ -10,9 +10,16 @@ destinations = [(x,x) for x in stations]
 
 class Login(FlaskForm):
 
-    username = StringField(u"Username:")
-    password = PasswordField(u"Password:")
+    username = StringField(u"Username:",validators=[validators.DataRequired()])
+    password = PasswordField(u"Password:",validators=[validators.DataRequired()])
     submit = SubmitField('Log in')
+
+class QuickRegister(FlaskForm):
+    username = StringField(u"Username:",validators=[validators.DataRequired()])
+    fullname = StringField(u"Full name:",validators=[validators.DataRequired()])
+    password = StringField(u"Password:",validators=[validators.DataRequired()])
+    repeat_password = StringField(u"Repeat password:",validators=[validators.DataRequired()])
+    submit = SubmitField("Register")
 
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
@@ -36,3 +43,7 @@ class PurchaseTicket(FlaskForm):
                         ('skis','Bring your ski equipment')
     ])
     submit = SubmitField("Go to payment")
+
+class EntryAuth(FlaskForm):
+    entrypassword = PasswordField(u"Entry password:", validators=[validators.DataRequired()])
+    submit = SubmitField("Go to site")

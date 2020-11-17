@@ -1,6 +1,6 @@
 from app import app
-from flask import Flask, render_template, Markup
-from app.forms import Login, PurchaseTicket
+from flask import Flask, render_template, session, redirect, url_for
+from app.forms import Login, PurchaseTicket, QuickRegister, EntryAuth
 
 nav_items = {
     "HOME":"homepage",
@@ -13,7 +13,10 @@ nav_items = {
 
 @app.route('/')
 def homepage():
-    return render_template("homepage.html", nav_items=nav_items)
+    if session.get('access_granted') == True:
+        return render_template("homepage.html", nav_items=nav_items)
+    else:
+        return redirect(url_for('access_site'))
 
 @app.route('/purchase')
 def purchase():
@@ -36,4 +39,16 @@ def about():
 def login():
     # forms
     form = Login()
-    return render_template("login.html", nav_items=nav_items, form=form)
+    register = QuickRegister()
+    return render_template("login.html", nav_items=nav_items, form=form, register=register)
+
+@app.route('/lock', methods=['GET','POST'])
+def access_site():
+    form = EntryAuth()
+    if form.validate_on_submit():
+        if form.entrypassword.data == "oslometACIT4070":
+            session['access_granted'] = True
+            return redirect(url_for('homepage'))
+        else:
+            return redirect(url_for('access_site'))
+    return render_template("accesslock.html",form=form)
