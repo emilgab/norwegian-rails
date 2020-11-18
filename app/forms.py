@@ -47,3 +47,7 @@ class PurchaseTicket(FlaskForm):
 class EntryAuth(FlaskForm):
     entrypassword = PasswordField(u"Entry password:", validators=[validators.DataRequired()])
     submit = SubmitField("Go to site")
+
+class DeleteTicket(FlaskForm):
+    ticket_serial = StringField(u"",validators=[validators.DataRequired()])
+    submit = SubmitField("Delete ticket")

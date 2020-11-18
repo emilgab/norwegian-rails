@@ -140,3 +140,4 @@ migrations/
 data.sqlite
 
 # QR related
+qr*

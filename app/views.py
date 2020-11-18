@@ -1,7 +1,7 @@
 from app import app, db
 from flask import Flask, render_template, session, redirect, url_for, request
 from app.models import Users, Ticket
-from app.forms import Login, PurchaseTicket, QuickRegister, EntryAuth
+from app.forms import Login, PurchaseTicket, QuickRegister, EntryAuth, DeleteTicket
 from flask_login import login_user, login_required, logout_user, current_user
 from datetime import datetime
 from random import randint
@@ -82,8 +82,9 @@ def ticket_purchase():
 @login_required
 def show_tickets():
     if session.get('access_granted') == True:
+        form = DeleteTicket()
         tickets = Ticket.query.filter_by(username=current_user.username).order_by(asc(Ticket.date)).all()
-        return render_template("show_tickets.html", nav_items=nav_items, tickets=tickets)
+        return render_template("show_tickets.html", nav_items=nav_items, tickets=tickets, form=form)
     else:
         return redirect(url_for('access_site'))
 
@@ -159,3 +160,11 @@ def access_site():
         else:
             return redirect(url_for('access_site'))
     return render_template("accesslock.html",form=form)
+
+@app.route('/delete_ticket', methods=['GET','POST'])
+def delete_ticket():
+    tickets = Ticket.query.filter_by(username=current_user.username).all()
+    ticket_serial = session.get('ticket_for_delete')
+    db.session.delete(ticket_serial)
+    db.session.commit()
+    return redirect(url_for('show_tickets'))

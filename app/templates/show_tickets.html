@@ -105,9 +105,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning btn-block">Edit ticket</button>
-        <button type="button" class="btn btn-danger btn-block">Cancel ticket</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form class="" method="post">
+          {{form.hidden_tag()}}
+          {{form.submit(class="btn", style="width:100%")}}
+        </form>
       </div>
     </div>
   </div>
