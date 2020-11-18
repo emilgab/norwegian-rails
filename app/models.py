@@ -27,6 +27,7 @@ class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userid = db.Column(db.String, unique=False)
     username = db.Column(db.String, unique=False)
+    fullname = db.Column(db.String, unique=False)
     start_station = db.Column(db.String, unique=False)
     end_station = db.Column(db.String, unique=False)
     date = db.Column(db.String, unique=False)

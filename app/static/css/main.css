@@ -81,3 +81,16 @@ form .custom-form, form .custom-form:focus {
   top: 0;
   left: 0;
 }
+
+.modal-content {
+  background-color: rgba(50,48,49,1);
+  border: 2px solid #b38e47;
+}
+
+.modal-header {
+  border-bottom: 2px solid #b38e47;
+}
+
+.modal-footer {
+  border-top: 2px solid #b38e47;
+}

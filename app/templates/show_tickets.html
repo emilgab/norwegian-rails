@@ -19,10 +19,93 @@
       <div class="card">
         <h5 class="mt-3">{{ticket.date}}</h5>
         <p>{{ticket.start_station}} - {{ticket.end_station}}</p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ticketSerial{{ticket.ticket_serial}}">
+          Show ticket for validation
+        </button>
       </div>
     </div>
     {% endfor %}
   </div>
   {% endif %}
 </div>
+{% for ticket in tickets %}
+<div class="modal fade" id="ticketSerial{{ticket.ticket_serial}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" align="center">{{ticket.start_station}} - {{ticket.end_station}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color:#b38e47;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-4">
+            <p style="font-size:12px;">Date:<br><strong>{{ticket.date}}</strong></p>
+          </div>
+          <div class="col-4">
+            <p style="font-size:12px;">Traveler:<br><strong>{{ticket.fullname}}</strong></p>
+          </div>
+          <div class="col-4">
+            <p style="font-size:12px;">Number of travelers:<br><strong>{{ticket.passengers}}</strong></p>
+          </div>
+        </div>
+        <p>Seat reservation:</p>
+        <div class="row">
+          <div class="col-12" align="center">
+            {% if ticket.seat_reservation == "None" %}
+            <img src="{{url_for('static',filename='img/icons/none.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">No reservation</p>
+            {% endif %}
+            {% if ticket.seat_reservation == "Wheelchair space" %}
+            <img src="{{url_for('static',filename='img/icons/hc.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">Wheelchair space</p>
+            {% endif %}
+            {% if ticket.seat_reservation == "Comfort cart seat" %}
+            <img src="{{url_for('static',filename='img/icons/comfort.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">Comfort cart seat</p>
+            {% endif %}
+            {% if ticket.seat_reservation == "Sleeping Quarters" %}
+            <img src="{{url_for('static',filename='img/icons/sleep.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">Sleep Quarters</p>
+            {% endif %}
+          </div>
+        </div>
+        <p>Additional services:</p>
+        <div class="row">
+          <div class="col-3" align="center">
+            {% if "Chicken" in ticket.add_ons %}
+            <img src="{{url_for('static',filename='img/icons/chicken.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">Food: Chicken</p>
+            {% endif %}
+          </div>
+          <div class="col-3" align="center">
+            {% if "Fish" in ticket.add_ons %}
+            <img src="{{url_for('static',filename='img/icons/fish.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">Food: Fish</p>
+            {% endif %}
+          </div>
+          <div class="col-3" align="center">
+            {% if "dog" in ticket.add_ons %}
+            <img src="{{url_for('static',filename='img/icons/dog.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">Brings a dog</p>
+            {% endif %}
+          </div>
+          <div class="col-3" align="center">
+            {% if "ski" in ticket.add_ons %}
+            <img src="{{url_for('static',filename='img/icons/skis.png')}}" alt="" style="width:50px;">
+            <p class="mt-2">Brings skis</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning btn-block">Edit ticket</button>
+        <button type="button" class="btn btn-danger btn-block">Cancel ticket</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

@@ -23,6 +23,7 @@ def homepage():
         return redirect(url_for('access_site'))
 
 @app.route('/purchase', methods=['GET','POST'])
+@login_required
 def purchase():
     if session.get('access_granted') == True:
         form = PurchaseTicket()
@@ -32,11 +33,6 @@ def purchase():
                 now = datetime.now()
                 ticket_serial = str(randint(100,999)) + str(now.strftime("%Y%m%d%m%s")) + str(randint(100,999))
                 ticket_info["ticket_serial"] = ticket_serial
-                userid = str(current_user.id)
-                username = current_user.username
-                ticket_info["username"] = username
-                fullname = current_user.fullname
-                ticket_info["fullname"] = fullname
                 start_station = form.start_station.data
                 ticket_info["start_station"] = start_station
                 end_station = form.end_station.data
@@ -49,6 +45,11 @@ def purchase():
                 ticket_info["seat_reservation"] = seat_reservation
                 add_ons = ", ".join(form.add_ons.data)
                 ticket_info["add_ons"] = add_ons
+                userid = str(current_user.id)
+                username = current_user.username
+                ticket_info["username"] = username
+                fullname = current_user.fullname
+                ticket_info["fullname"] = fullname
                 new_ticket = Ticket(userid=userid,username=username,fullname=fullname,start_station=start_station,
                                     end_station=end_station,date=date,passengers=passengers,
                                     seat_reservation=seat_reservation,add_ons=add_ons, ticket_serial=ticket_serial)
