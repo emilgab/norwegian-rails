@@ -2,7 +2,10 @@ from app import app, db
 from flask import Flask, render_template, session, redirect, url_for, request
 from app.models import Users, Ticket
 from app.forms import Login, PurchaseTicket, QuickRegister, EntryAuth
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
+from datetime import datetime
+from random import randint
+from sqlalchemy import asc
 
 nav_items = {
     "HOME":"homepage",
@@ -10,7 +13,6 @@ nav_items = {
     "SHOW TICKETS":"show_tickets",
     "YOUR PROFILE":"profile",
     "ABOUT US":"about",
-    "LOG IN":"login"
 }
 
 @app.route('/')
@@ -20,19 +22,55 @@ def homepage():
     else:
         return redirect(url_for('access_site'))
 
-@app.route('/purchase')
+@app.route('/purchase', methods=['GET','POST'])
 def purchase():
     if session.get('access_granted') == True:
         form = PurchaseTicket()
+        if form.validate_on_submit():
+            ticket_info = {}
+            if current_user.is_authenticated:
+                now = datetime.now()
+                ticket_serial = str(randint(100,999)) + str(now.strftime("%Y%m%d%m%s")) + str(randint(100,999))
+                ticket_info["ticket_serial"] = ticket_serial
+                userid = str(current_user.id)
+                username = current_user.username
+                ticket_info["username"] = username
+                fullname = current_user.fullname
+                ticket_info["fullname"] = fullname
+                start_station = form.start_station.data
+                ticket_info["start_station"] = start_station
+                end_station = form.end_station.data
+                ticket_info["end_station"] = end_station
+                date = str(form.travel_date.data)
+                ticket_info["date"] = date
+                passengers = str(form.number_of_passengers.data)
+                ticket_info["passengers"] = passengers
+                seat_reservation = form.seat_reservation.data
+                ticket_info["seat_reservation"] = seat_reservation
+                add_ons = ", ".join(form.add_ons.data)
+                ticket_info["add_ons"] = add_ons
+                new_ticket = Ticket(userid=userid,username=username,fullname=fullname,start_station=start_station,
+                                    end_station=end_station,date=date,passengers=passengers,
+                                    seat_reservation=seat_reservation,add_ons=add_ons, ticket_serial=ticket_serial)
+                db.session.add(new_ticket)
+                db.session.commit()
+                session["ticket_info"] = ticket_info
+                return redirect(url_for("ticket_purchase"))
         return render_template("purchase_tickets.html", nav_items=nav_items, form=form)
     else:
         return redirect(url_for('access_site'))
+
+@app.route("/ticket_purchase")
+@login_required
+def ticket_purchase():
+    return render_template("ticket_confirmation.html",nav_items=nav_items)
 
 @app.route('/show_tickets')
 @login_required
 def show_tickets():
     if session.get('access_granted') == True:
-        return render_template("show_tickets.html", nav_items=nav_items)
+        tickets = Ticket.query.filter_by(username=current_user.username).order_by(asc(Ticket.date)).all()
+        return render_template("show_tickets.html", nav_items=nav_items, tickets=tickets)
     else:
         return redirect(url_for('access_site'))
 

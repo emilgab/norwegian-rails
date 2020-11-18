@@ -31,16 +31,16 @@ class PurchaseTicket(FlaskForm):
     travel_date = DateField(u"Travel date:", format="%d/%m/%Y", default=datetime.today, validators=[validators.DataRequired()])
     number_of_passengers = IntegerField(u"Passengers:", validators=[validators.DataRequired()])
     seat_reservation = RadioField('Seat reservation',choices=[
-                        ('none','No reservations'),
-                        ('hc','Wheelchair space'),
-                        ('comfort','Comfort cart seat'),
-                        ('sleep','Sleeping quarters')
-                        ], default='none', validators=[validators.DataRequired()])
+                        ('None','No reservations'),
+                        ('Wheelchair space','Wheelchair space'),
+                        ('Comfort cart seat','Comfort cart seat'),
+                        ('Sleeping Quarters','Sleeping Quarters')
+                        ], default='None', validators=[validators.DataRequired()])
     add_ons = MultiCheckboxField(choices = [
-                        ('chicken','Food serving: Chicken'),
-                        ('fish','Food serving: Fish and sides'),
-                        ('dog','Bring your dog onboard'),
-                        ('skis','Bring your ski equipment')
+                        ('Food serving: Chicken','Food serving: Chicken'),
+                        ('Food serving: Fish','Food serving: Fish and sides'),
+                        ('Bring your dog onboard','Bring your dog onboard'),
+                        ('Bring your ski equipment','Bring your ski equipment')
     ])
     submit = SubmitField("Go to payment")
 

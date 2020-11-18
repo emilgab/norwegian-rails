@@ -33,3 +33,16 @@ class Ticket(db.Model):
     passengers = db.Column(db.String, unique=False)
     seat_reservation = db.Column(db.String, unique=False)
     add_ons = db.Column(db.String, unique=False)
+    ticket_serial = db.Column(db.String, unique=True)
+
+    def __init__(self, userid, username, fullname, start_station, end_station, date, passengers, seat_reservation, add_ons, ticket_serial):
+        self.userid = userid
+        self.username = username
+        self.fullname = fullname
+        self.start_station = start_station
+        self.end_station = end_station
+        self.date = date
+        self.passengers = passengers
+        self.seat_reservation = seat_reservation
+        self.add_ons = add_ons
+        self.ticket_serial = ticket_serial

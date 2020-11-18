@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-5">Your purchase has been completed!</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mb-5">
+      <h4 class="">{{session["ticket_info"]["start_station"]}} - {{session["ticket_info"]["end_station"]}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p>
+        Your ticket information:
+        <ul>
+          <li>Traveler: {{session["ticket_info"]["fullname"]}}</li>
+          <li>Date: {{session["ticket_info"]["date"]}}</li>
+          <li>Number of travelers: {{session["ticket_info"]["passengers"]}}</li>
+          <li>Seat reservation: {{session["ticket_info"]["seat_reservation"]}}</li>
+          {% if session["ticket_info"]["add_ons"] == False %}
+          <li>Additional services: None</li>
+          {% endif %}
+          {% if session["ticket_info"]["add_ons"] %}
+          <li class="mb-3">Additional services: {{session["ticket_info"]["add_ons"]}}</li>
+          {% endif %}
+          <li>Ticket serial: {{session["ticket_info"]["ticket_serial"]}}</li>
+
+        </ul>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
