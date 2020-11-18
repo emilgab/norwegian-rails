@@ -11,13 +11,16 @@ class Users(db.Model,UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
-    password = db.Column(db.String, unique=False)
+    password_hash = db.Column(db.String, unique=False)
     fullname = db.Column(db.String, unique=False)
 
     def __init__(self,username,password,fullname):
         self.username=username
-        self.password=password
+        self.password_hash=generate_password_hash(password)
         self.fullname=fullname
+
+    def check_password(self,password):
+        return check_password_hash(self.password_hash,password)
 
 class Ticket(db.Model):
     __tablename__ = u"tickets"

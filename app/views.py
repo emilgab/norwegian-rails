@@ -62,7 +62,7 @@ def login():
             except:
                 pass
             try:
-                if user.password == form.password.data:
+                if user.check_password(form.password.data) and user is not None:
                     login_user(user)
                     next = request.args.get('next')
                     if next == None or not next[0] == '/':
