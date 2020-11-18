@@ -35,8 +35,9 @@ class Ticket(db.Model):
     seat_reservation = db.Column(db.String, unique=False)
     add_ons = db.Column(db.String, unique=False)
     ticket_serial = db.Column(db.String, unique=True)
+    path_to_qr = db.Column(db.String, unique=False)
 
-    def __init__(self, userid, username, fullname, start_station, end_station, date, passengers, seat_reservation, add_ons, ticket_serial):
+    def __init__(self, userid, username, fullname, start_station, end_station, date, passengers, seat_reservation, add_ons, ticket_serial, path_to_qr):
         self.userid = userid
         self.username = username
         self.fullname = fullname
@@ -47,3 +48,4 @@ class Ticket(db.Model):
         self.seat_reservation = seat_reservation
         self.add_ons = add_ons
         self.ticket_serial = ticket_serial
+        self.path_to_qr = path_to_qr

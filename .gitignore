@@ -132,7 +132,11 @@ dmypy.json
 
 # MAC related files
 .DS_Store
+**/.DS_Store
+
 
 # SQLITE db
 migrations/
 data.sqlite
+
+# QR related

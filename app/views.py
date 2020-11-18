@@ -6,6 +6,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 from datetime import datetime
 from random import randint
 from sqlalchemy import asc
+import qrcode
+import os
 
 nav_items = {
     "HOME":"homepage",
@@ -50,9 +52,17 @@ def purchase():
                 ticket_info["username"] = username
                 fullname = current_user.fullname
                 ticket_info["fullname"] = fullname
+                qr = qrcode.QRCode(version=1, box_size=10, border=2)
+                qr.add_data("https://www.oslomet.no")
+                qr.make(fit=True)
+                img = qr.make_image(fill='black', back_color='white')
+                path_to_qr = url_for('static',filename=('qrcodes/'))
+                img.save(f"app/{path_to_qr}"+'qrcode_ticket'+ticket_serial+'.png')
+                path_to_qr += 'qrcode_ticket'+ticket_serial+'.png'
                 new_ticket = Ticket(userid=userid,username=username,fullname=fullname,start_station=start_station,
                                     end_station=end_station,date=date,passengers=passengers,
-                                    seat_reservation=seat_reservation,add_ons=add_ons, ticket_serial=ticket_serial)
+                                    seat_reservation=seat_reservation,add_ons=add_ons, ticket_serial=ticket_serial,
+                                    path_to_qr=path_to_qr)
                 db.session.add(new_ticket)
                 db.session.commit()
                 session["ticket_info"] = ticket_info
