@@ -55,8 +55,10 @@ def purchase():
                 qr = qrcode.QRCode(version=1, box_size=10, border=2)
                 qr.add_data("https://www.oslomet.no")
                 qr.make(fit=True)
+                if os.path.exists('app/static/img/qrcodes') == False:
+                    os.makedirs('app/static/img/qrcodes')
                 img = qr.make_image(fill='black', back_color='white')
-                path_to_qr = url_for('static',filename=('qrcodes/'))
+                path_to_qr = url_for('static',filename=('img/qrcodes/'))
                 img.save(f"app/{path_to_qr}"+'qrcode_ticket'+ticket_serial+'.png')
                 path_to_qr += 'qrcode_ticket'+ticket_serial+'.png'
                 new_ticket = Ticket(userid=userid,username=username,fullname=fullname,start_station=start_station,
