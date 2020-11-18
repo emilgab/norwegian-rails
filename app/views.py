@@ -83,6 +83,8 @@ def ticket_purchase():
 def show_tickets():
     if session.get('access_granted') == True:
         form = DeleteTicket()
+        if form.validate_on_submit():
+            pass
         tickets = Ticket.query.filter_by(username=current_user.username).order_by(asc(Ticket.date)).all()
         return render_template("show_tickets.html", nav_items=nav_items, tickets=tickets, form=form)
     else:
