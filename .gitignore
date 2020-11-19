@@ -137,7 +137,6 @@ dmypy.json
 
 # SQLITE db
 migrations/
-data.sqlite
 
 # QR related
 qr*
