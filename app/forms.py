@@ -28,7 +28,7 @@ class MultiCheckboxField(SelectMultipleField):
 class PurchaseTicket(FlaskForm):
     start_station = SelectField(u"Start station:", choices=destinations, validators=[validators.DataRequired()])
     end_station = SelectField(u"End station:", choices=destinations, validators=[validators.DataRequired()])
-    travel_date = DateField(u"Travel date:", format="%d/%m/%Y", default=datetime.today, validators=[validators.DataRequired()])
+    travel_date = StringField(u"Travel date:", validators=[validators.DataRequired()])
     number_of_passengers = IntegerField(u"Passengers:", validators=[validators.DataRequired()])
     seat_reservation = RadioField('Seat reservation',choices=[
                         ('None','No reservations'),
