@@ -108,7 +108,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <form class="" method="post">
           {{form.hidden_tag()}}
-          {{form.ticket_serial()}}
+          {{form.ticket_serial(class="my-hidden-form",value=ticket.ticket_serial)}}
           {{form.submit(class="btn")}}
         </form>
       </div>

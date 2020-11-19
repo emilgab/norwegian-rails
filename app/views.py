@@ -78,13 +78,17 @@ def purchase():
 def ticket_purchase():
     return render_template("ticket_confirmation.html",nav_items=nav_items)
 
-@app.route('/show_tickets')
+@app.route('/show_tickets', methods=['GET','POST'])
 @login_required
 def show_tickets():
     if session.get('access_granted') == True:
         form = DeleteTicket()
+        tickets = Ticket.query.filter_by(username=current_user.username)
         if form.validate_on_submit():
-            pass
+            ticket_to_delete = Ticket.query.filter_by(ticket_serial=form.ticket_serial.data).first()
+            db.session.delete(ticket_to_delete)
+            db.session.commit()
+            return redirect(url_for('show_tickets'))
         tickets = Ticket.query.filter_by(username=current_user.username).order_by(asc(Ticket.date)).all()
         return render_template("show_tickets.html", nav_items=nav_items, tickets=tickets, form=form)
     else:

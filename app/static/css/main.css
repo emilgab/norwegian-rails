@@ -94,3 +94,7 @@ form .custom-form, form .custom-form:focus {
 .modal-footer {
   border-top: 2px solid #b38e47;
 }
+
+.my-hidden-form {
+  display: none;
+}

@@ -49,5 +49,5 @@ class EntryAuth(FlaskForm):
     submit = SubmitField("Go to site")
 
 class DeleteTicket(FlaskForm):
-    ticket_serial = StringField(u"",validators=[validators.DataRequired()])
+    ticket_serial = StringField(u"")
     submit = SubmitField("Delete ticket")
